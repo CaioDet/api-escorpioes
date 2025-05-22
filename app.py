@@ -32,12 +32,10 @@ def mapa():
     if not dados:
         return "Sem dados para exibir."
 
-    # Centraliza o mapa na média
     lat_media = sum(d['latitude'] for d in dados) / len(dados)
     lon_media = sum(d['longitude'] for d in dados) / len(dados)
 
     mapa = folium.Map(location=[lat_media, lon_media], zoom_start=13)
-
     pontos = [[d['latitude'], d['longitude']] for d in dados]
     HeatMap(pontos).add_to(mapa)
 
@@ -54,7 +52,7 @@ def mapa():
     </html>
     """, html=html)
 
-# Rota para adicionar nova ocorrência
+# Formulário para nova ocorrência
 @app.route('/adicionar', methods=['GET', 'POST'])
 def adicionar_ocorrencia():
     if request.method == 'POST':
@@ -108,6 +106,7 @@ def adicionar_ocorrencia():
     </html>
     """)
 
-# Iniciar a aplicação
+# 👇 ESSENCIAL para funcionar no Render
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=10000)
+    
