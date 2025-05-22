@@ -107,6 +107,13 @@ def adicionar_ocorrencia():
     """)
 
 # 👇 ESSENCIAL para funcionar no Render
+
+from flask import send_file
+
+@app.route('/home')
+def homepage():
+    return send_file('index.html')
+    
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
     
